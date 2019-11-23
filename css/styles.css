@@ -1,6 +1,8 @@
 html,
 body {
     height: 100%;
+    width: 100%;
+    background-color: #FbFbFb;
 }
 header {
     display: flex;
@@ -18,11 +20,13 @@ h1 {
     font-size: 1.5rem;
     padding: 0.7rem;
     padding-bottom: 0.1rem;
+    color: #2B2B2B;
 }
 
 h2 {
     font-family: 'Old Standard TT', serif;
     font-size: 1.2rem;
+    color: #2b2b2b;
 }
 
 section {
@@ -43,6 +47,87 @@ input {
 }
 
 input:focus {
-    background-color: gray;
+    background-color: #f2f2f2;
     border-radius: 3px;
+}
+
+.price__dropbtn,
+.product__dropbtn
+ {
+    
+    width: 35vw;
+    margin-top: 0.4rem;
+    font-family: 'Old Standard TT', serif;
+    font-size: 1.02rem;
+    padding: 0.2rem;
+    background-color: #e8f3f8;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border: 1px solid #d4e9f2;
+    border-radius: 2px; 
+    outline: none;
+}
+
+.price__options,
+.product__options
+ {
+    display: flex;
+    display: none;
+    flex-direction: column;
+    background-color: #666666;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2)
+}
+
+.price__dropbtn:hover .price__options {
+    display: block;
+
+}
+
+a {
+    font-family: 'Lato', sans-serif;
+    text-decoration: none;
+    padding: 0.4rem;
+    color: #fbfbfb;
+}
+
+a:hover {
+    background-color: #fbfbfb;
+    color: #666666;
+}
+
+.carousel {
+    height: 50vh;
+    width: 80vw;
+    margin: 0 auto;
+   
+}
+
+.carousel__container {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    margin-left: 0.2rem;
+    overflow: hidden;
+}
+
+.carousel__image {
+    width: 80vw;
+    height: auto;
+    margin: auto;  
+    position: absolute;
+}
+
+.carousel__btn {
+    position: absolute;
+    top: 55%;
+}
+
+.carousel__btn--left {
+    left: 11vw;
+    z-index: 1;
+
+}
+
+.carousel__btn--right {
+    right: 10vw;
+    z-index: 1;
 }
