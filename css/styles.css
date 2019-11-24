@@ -57,11 +57,12 @@ input {
 
 .submit-btn {
     position: absolute;
-    right: 24vw;
-    top: 26vw;
+    right: 20vw;
+    top: 30vw;
     width: 8vw;
-    height: 3.8vh;
+    height: 5.9vh;
     border: none;
+    border-bottom: 1px solid gray;
     border-radius: 0.5px;
     outline: none;
 }
@@ -133,14 +134,14 @@ a:hover {
     flex-direction: column;
     width: 80vw;
     margin-left: 0.2rem;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .carousel__image {
     width: 75vw;
     height: auto;
-    margin: 5vh auto;  
-    position: absolute;
+    margin: 5vh auto;
+    position: absolute; 
     transition: transform .5s, opacity .5s, z-index .5s;
 }
 
