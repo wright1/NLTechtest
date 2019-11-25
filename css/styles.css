@@ -66,6 +66,12 @@ input {
     border-radius: 0.5px;
     outline: none;
 }
+@media only screen and (min-width: 375px) {
+    .submit-btn {
+        top: 14.5vh;
+        height: 4.9vh;
+    }
+}
 
 .submit-btn:hover {
     background-color: #e8f3f8; 
@@ -128,6 +134,11 @@ a:hover {
     margin: 0 auto;
    
 }
+@media only screen and(min-width: 1024px) {
+    .carousel {
+        width: 85vw;
+    }
+}
 
 .carousel__container {
     display: flex;
@@ -135,6 +146,16 @@ a:hover {
     width: 80vw;
     margin-left: 0.2rem;
     /* overflow: hidden; */
+}
+@media only screen and (min-width: 1024px){
+    .carousel__container{
+        flex-direction: row;
+        width: 50vw;
+        height: 55vh;
+        margin: auto;
+        margin-top: 3rem;
+        overflow: hidden;
+    }
 }
 
 .carousel__image {
@@ -144,19 +165,54 @@ a:hover {
     position: absolute; 
     transition: transform .5s, opacity .5s, z-index .5s;
 }
+@media only screen and (min-width: 1024px){
+    .carousel__image{
+        width: 15vw;
+        margin-right: 3vw;
+        position: static;
+        display: none;
+    }
+
+}
+
+@media only screen and(min-width: 1024px) {
+    .carouselBtn__container {
+        display: flex;
+        justify-content: center;
+        width: 90vw;
+        height: 30vh;
+    }
+}
 
 .carousel__btn {
-    width: 10vw;
-    height: 10vw;
+    width: 13vw;
+    height: 13vw;
     position: absolute;
-    bottom: 2vh;
+    bottom: 0.3vh;
     background-color: white;
     border: 0.5px solid black;
     border-radius: 50rem;
     outline: none;
-    
 }
+@media only screen and (min-width: 370px) {
+    .carousel__btn{
+        bottom: 5vh;
 
+    }
+}
+@media only screen and (min-width: 1024px) {
+    .carousel__btn{
+        width: 5vw;
+        height: 7vw;
+        bottom: 10vh;
+        background-color: rgba(46, 49, 49, 0.7);
+        color: rgba(242, 241, 239, 1);
+        border-radius: 3px;
+        font-size: 2rem;
+        
+    }
+}
+    
 .carousel__btn--left {
     left: 30vw;
 }
@@ -164,3 +220,4 @@ a:hover {
 .carousel__btn--right {
     right: 30vw;
 }
+

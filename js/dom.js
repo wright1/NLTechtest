@@ -1,5 +1,8 @@
 let showItems = document.getElementsByClassName("carousel__image");
+let width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 let totalItems; //this is initially set to the length of arr displaying images
+let slide = 1;
+let widthMatch = window.matchMedia("(min-width: 1024px)");
 let count = 0;
 
 const displayProducts = arr => {
@@ -24,27 +27,64 @@ const displayProducts = arr => {
   });
   totalItems = arr.length - 1;
 };
+const initialDisplay = () => {
+  showItems[0].style.display = 'initial';
+  showItems[1].style.display = 'initial';
+  showItems[2].style.display = 'initial';
+}
 const setBtnEventlisteners = () => {
   const prev = document.getElementsByClassName("carousel__btn--left")[0];
   const next = document.getElementsByClassName("carousel__btn--right")[0];
   const search = document.getElementsByClassName("submit-btn")[0];
-
-  prev.addEventListener("click", movePrev);
-  next.addEventListener("click", moveNext);
+  
+  
+  if(width >= 1024){
+    prev.addEventListener("click", fullScreenMovePrev);
+    next.addEventListener("click", fullScreenMoveNext);
+  } else {
+    prev.addEventListener("click", movePrev);
+    next.addEventListener("click", moveNext);
+  }
+  
   search.addEventListener("click", searchResults);
 };
 const moveNext = () => {
   if (count === showItems.length - 2) return;
-  showItems[totalItems].style.transform = `translateX(${300}px)`;
+  showItems[totalItems].style.transform = `translateX(${400}px)`;
   totalItems--;
   count++;
 };
+const fullScreenMoveNext = () => {
+  console.log("The morning has started Next");
+  if(slide > (showItems.length-2)) slide = 1;
+  console.log(showItems.length);
+  let current = showItems[slide];
+  let added = slide + 2;
+  console.log('This is added', added);
+  current.style.display = 'initial';
+  if(slide > 1)showItems[slide-2].style.display = 'none'
+  current.previousSibling.style.display = 'none';
+  current.nextSibling.style.display = 'initial';
+  showItems[added].style.display = 'initial';
+  console.log('This is the first', slide);
+  slide += 2; 
+  console.log('This is the second slide', slide);
+  console.log(showItems); 
+}
 const movePrev = () => {
   if (count === 0) return;
   showItems[totalItems + 1].style.transform = `rotateY(-${5}deg)`;
   totalItems++;
   count--;
 };
+const fullScreenMovePrev = () => {
+  console.log("Lets go back to the previous screen");
+  
+  
+  
+
+  
+}
 const searchResults = () => {
   let input = document.getElementsByTagName("input")[0];
   //convert the user input to Title case
@@ -65,9 +105,11 @@ const searchResults = () => {
   //display the results
   displayProducts(resultArr);
 };
-window.onload = () => {
+window.onload = () => {  
   //render all images on screen
   displayProducts(productDataWomens);
   //set EventListeners on buttons
   setBtnEventlisteners();
+  //for fullscreen - set 3 images to display
+  if(width >= 1024) initialDisplay();
 };
