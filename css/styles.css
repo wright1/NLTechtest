@@ -175,6 +175,10 @@ a:hover {
 
 }
 
+.result {
+    display: initial;
+}
+
 @media only screen and(min-width: 1024px) {
     .carouselBtn__container {
         display: flex;

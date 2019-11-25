@@ -11,7 +11,7 @@ const displayProducts = arr => {
   while (list.firstChild) {
     list.firstChild.remove();
   };
-  arr.forEach(element => {
+  arr.forEach((element, i) => {
     const list = document.getElementsByClassName("carousel__container")[0];
     //creation of html element
     const listItem = document.createElement("img");
@@ -19,18 +19,20 @@ const displayProducts = arr => {
     listItem.setAttribute("class", "carousel__image");
     listItem.setAttribute("src", element.imageSrc);
     listItem.setAttribute("alt", element.productTitle);
+    if(i< 4) listItem.className += " result";
     //append elements
     list.appendChild(listItem);
-    listItem.addEventListener("click", () => {
+    listItem.addEventListener("click", (e) => {
       console.log("I've been clicked.");
-    });
+      popUp(e)
+    },false);
   });
   totalItems = arr.length - 1;
 };
-const initialDisplay = () => {
-  showItems[0].style.display = 'initial';
-  showItems[1].style.display = 'initial';
-  showItems[2].style.display = 'initial';
+const initialDisplay = (arr) => {
+  arr[0].style.display = 'initial';
+  arr[1].style.display = 'initial';
+  arr[2].style.display = 'initial';
 }
 const setBtnEventlisteners = () => {
   const prev = document.getElementsByClassName("carousel__btn--left")[0];
@@ -56,7 +58,8 @@ const moveNext = () => {
 };
 const fullScreenMoveNext = () => {
   console.log("The morning has started Next");
-  if(slide > (showItems.length-2)) slide = 1;
+  //if the value of slide +/- the length of the showItems array we reset it to 0
+  if(slide > (showItems.length-2) || slide < 1) slide = 1;
   console.log(showItems.length);
   let current = showItems[slide];
   let added = slide + 2;
@@ -78,11 +81,21 @@ const movePrev = () => {
   count--;
 };
 const fullScreenMovePrev = () => {
-  console.log("Lets go back to the previous screen");
+  slide -= 2;
+  const current = showItems[slide];
+  // if(slide < 1){
+  //   slide = showItems.length-2;
+  //   showItems[0].style.display = 'none'
+  //   current.previousSibling.style.display = 'initial';
+  //   current.style.display = 'initial';
+  //   current.nextSibling.style.display = 'initial';
+  // }
   
-  
-  
-
+  console.log(current, slide);
+  if(slide > 1)showItems[slide-2].style.display = 'none'
+  current.previousSibling.style.display = 'initial';
+  current.style.display = 'initial';
+  current.nextSibling.style.display = 'initial';
   
 }
 const searchResults = () => {
@@ -97,19 +110,34 @@ const searchResults = () => {
   };
   let result = toTitleCase(input.value);
   //filter productDataWomens based on user input
-  const filterEle = ele => {
+  const filterArr = ele => {
     return ele.productTitle.includes(result);
   };
-  const resultArr = productDataWomens.filter(filterEle);
+  var resultArr = productDataWomens.filter(filterArr);
   console.log(resultArr);
   //display the results
   displayProducts(resultArr);
+  //empty search bar
+  input.value ="";
 };
+const popUp = (e) => {
+  const product = e.target.alt;
+  const findImage = ele => {
+     return ele.productTitle === product
+  }
+  const resultObj = productDataWomens.filter(findImage);
+
+  console.log(resultObj)
+  
+
+  console.log('does it get in here', e.target.alt);
+
+}
 window.onload = () => {  
   //render all images on screen
   displayProducts(productDataWomens);
   //set EventListeners on buttons
   setBtnEventlisteners();
   //for fullscreen - set 3 images to display
-  if(width >= 1024) initialDisplay();
+  if(width >= 1024) initialDisplay(showItems);
 };
