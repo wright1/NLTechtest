@@ -5,9 +5,8 @@ let width = Math.max(
 );
 let totalItems; //this is initially set to the length of arr displaying images
 let slide = 1;
-let widthMatch = window.matchMedia("(min-width: 1024px)");
 let count = 0;
-
+//this function renders products
 const displayProducts = arr => {
   const list = document.getElementsByClassName("carousel__container")[0];
   //remove the previous list of images
@@ -28,7 +27,6 @@ const displayProducts = arr => {
     listItem.addEventListener(
       "click",
       e => {
-        console.log("I've been clicked.");
         popUp(e);
       },
       false
@@ -36,6 +34,7 @@ const displayProducts = arr => {
   });
   totalItems = arr.length - 1;
 };
+//set the first 3 items to visable in fullscreen view
 const initialDisplay = arr => {
   arr[0].style.display = "initial";
   arr[1].style.display = "initial";
@@ -54,7 +53,6 @@ const setBtnEventlisteners = () => {
     prev.addEventListener("click", movePrev);
     next.addEventListener("click", moveNext);
   }
-
   search.addEventListener("click", searchResults);
   close.addEventListener("click", closeModal);
 };
@@ -65,22 +63,16 @@ const moveNext = () => {
   count++;
 };
 const fullScreenMoveNext = () => {
-  console.log("The morning has started Next");
   //if the value of slide +/- the length of the showItems array we reset it to 0
   if (slide > showItems.length - 2 || slide < 1) slide = 1;
-  console.log(showItems.length);
   let current = showItems[slide];
   let added = slide + 2;
-  console.log("This is added", added);
   current.style.display = "initial";
   if (slide > 1) showItems[slide - 2].style.display = "none";
   current.previousSibling.style.display = "none";
   current.nextSibling.style.display = "initial";
   showItems[added].style.display = "initial";
-  console.log("This is the first", slide);
   slide += 2;
-  console.log("This is the second slide", slide);
-  console.log(showItems);
 };
 const movePrev = () => {
   if (count === 0) return;
@@ -91,15 +83,6 @@ const movePrev = () => {
 const fullScreenMovePrev = () => {
   slide -= 2;
   const current = showItems[slide];
-  // if(slide < 1){
-  //   slide = showItems.length-2;
-  //   showItems[0].style.display = 'none'
-  //   current.previousSibling.style.display = 'initial';
-  //   current.style.display = 'initial';
-  //   current.nextSibling.style.display = 'initial';
-  // }
-
-  console.log(current, slide);
   if (slide > 1) showItems[slide - 2].style.display = "none";
   current.previousSibling.style.display = "initial";
   current.style.display = "initial";
@@ -121,16 +104,13 @@ const searchResults = () => {
     return ele.productTitle.includes(result);
   };
   var resultArr = productDataWomens.filter(filterArr);
-  console.log(resultArr);
   //display the results
   displayProducts(resultArr);
   //empty search bar
   input.value = "";
 };
 const popUp = e => {
-  console.log('choa',popUp.firstChild);
-  
- 
+  //get name of product and filter productDataWomens
   const product = e.target.alt;
   const findImage = ele => {
     return ele.productTitle === product;
@@ -146,35 +126,30 @@ const popUp = e => {
   const title = document.createTextNode(resultObj.productTitle);
   const price = document.createTextNode(resultObj.price);
 
-
-  if(popupPrice.firstChild){
-  popupLink.href = "";
-  popupTitle.firstChild.remove();
-  popupPrice.firstChild.remove();
-  imageIMG.remove();
+  // remove previous popup details
+  if (popupPrice.firstChild) {
+    popupLink.href = "";
+    popupTitle.firstChild.remove();
+    popupPrice.firstChild.remove();
+    imageIMG.remove();
   }
-  
-  imageDiv.setAttribute('class', 'popup__image')
-  image.setAttribute('alt', e.target.alt);
-  image.setAttribute('src', resultObj.imageSrc);
+
+  imageDiv.setAttribute("class", "popup__image");
+  image.setAttribute("alt", e.target.alt);
+  image.setAttribute("src", resultObj.imageSrc);
   popupLink.href = resultObj.productUrl;
 
-  
   popupTitle.append(title);
   popupPrice.append(price);
   popUpDiv.appendChild(imageDiv);
   imageDiv.appendChild(image);
 
-  popUpDiv.style.display = 'initial';
-
-  console.log(resultObj);
-
-  console.log("does it get in here", e.target.alt);
+  popUpDiv.style.display = "initial";
 };
 const closeModal = () => {
   const btn = document.getElementsByClassName("popup__close")[0].parentNode;
-  btn.parentNode.style.display = 'none';
-}
+  btn.parentNode.style.display = "none";
+};
 window.onload = () => {
   //render all images on screen
   displayProducts(productDataWomens);
