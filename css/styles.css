@@ -4,15 +4,56 @@ body {
     width: 100%;
     background-color: #FbFbFb;
 }
-
+/* popup which stays hidden until click event */
 .popup {
     display: flex;
     display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
     width: 100vw;
     height: 100vh;
+    align-items: center;
+    justify-content: center;
     background-color: black;
+    z-index: 1;
 }
 
+.popup__detail {
+    color: white;
+    z-index: 1;
+}
+@media only screen and (min-width: 1024px){
+    .popup__detail {
+        margin-left: 80vw;
+        font-size: 1rem;
+    }
+}
+
+.popup__close {
+  color: #aaa;
+  float: right;
+  font-size: 3rem;
+  margin-right: 2rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+@media only screen and (min-width: 1024px) {
+    .popup__close {
+        font-size: 4rem;
+        margin-right: 3rem;
+        color: white;
+    }
+}
+.popup__image {
+    margin: 15vh auto;
+}
+@media only screen and (min-width: 1020px){
+    .popup__image {
+        margin-left: 35vw;
+    }
+}
+/* header contains title and subtitle */
 header {
     display: flex;
     flex-direction: column;
@@ -31,12 +72,19 @@ h1 {
     padding-bottom: 0.1rem;
     color: #2B2B2B;
 }
+@media only screen and (min-width: 1024px) {
+    h1 {
+        font-size: 2rem;
+    }
+}
 
 h2 {
     font-family: 'Old Standard TT', serif;
     font-size: 1.2rem;
     color: #2b2b2b;
 }
+
+/* section contains searchbar and filter buttons */
 
 section {
     display: flex;
@@ -70,6 +118,12 @@ input {
     .submit-btn {
         top: 14.5vh;
         height: 4.9vh;
+    }
+}
+@media only screen and (min-width: 1024px) {
+    .submit-btn {
+        top: 12.9vh;
+        right: 37vw;
     }
 }
 
@@ -125,7 +179,7 @@ a:hover {
     background-color: #fbfbfb;
     color: #666666;
 }
-
+/* styling for the carousel */
 .carousel {
     display: flex;
     flex-direction: column;
@@ -208,7 +262,7 @@ a:hover {
     .carousel__btn{
         width: 5vw;
         height: 7vw;
-        bottom: 10vh;
+        bottom: 8vh;
         background-color: rgba(46, 49, 49, 0.7);
         color: rgba(242, 241, 239, 1);
         border-radius: 3px;
